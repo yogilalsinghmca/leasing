@@ -1,20 +1,33 @@
 version: '3'
 services:
-  app:
+  leasing-api:
+    container_name: leasing-api
+    image: leasing-image:latest
+#    networks:
+#      - leasing-api-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
-      - mysqldb
-  mysqldb:
-    image: mysql:8
+      lease-db:
+        condition: service_completed_successfully
+  lease-db:
+    container_name: lease-db
+    image: mysql:latest
+#    networks:
+#      - leasing-api-network
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: leasing
+      MYSQL_DATABASE: lease
       MYSQL_USER: username
       MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root_password
     volumes:
       - ./mysql-data:/var/lib/mysql
+#networks:
+#  leasing-api-network:
