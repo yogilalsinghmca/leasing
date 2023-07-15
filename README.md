@@ -11,15 +11,21 @@ it provides a REST API that CRUD operations related to leasing a car.
 * Java 17
 * Gradle
 
-## Running the Microservice using Maven spring boot plugin
+## setup, running on Local host
+- Make sure docker is installed, up and running
 
-``` mvn spring-boot:run ```
+## Running the Microservice using Gradle spring boot plugin
 
-## Running the Microservice as docker container
+- Step 1. start the mysql database container from project root
+*  `./docker-compose up lease-db`
+- Step 2. run  the spring boot service from project root in another terminal
+* `./gradlew bootRun`
+
+## Running the Microservice as docker containers
 - Step 1. Build the runnable jar  
-  ``` ./gradlew build ```
-- Step 2. run docker container from project root  
-  ```  docker-compose up ```
+* `./gradlew clean build`
+- Step 2. run containers(App and Database) from project root  
+* `docker-compose up`
 
 ## Testing the Microservice using POSTMAN
 postman collection added in root directory to perform testing API  
