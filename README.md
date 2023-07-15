@@ -5,7 +5,7 @@ it provides a REST API that CRUD operations related to leasing a car.
 ## Technologies Used
 * Spring boot
 * Spring Data JPA
-* mysql Database and H2 for quick setup and run 
+* mysql Database and H2 for testing
 * Docker
 * Lombok
 * Java 17
@@ -20,7 +20,7 @@ it provides a REST API that CRUD operations related to leasing a car.
 - Step 2. run containers(App and Database) from project root  
 * `docker-compose up`
 * 
-## Running the Microservice using Gradle spring boot plugin
+## Run the Microservice using Gradle spring boot plugin
 
 - Step 1. Build the runnable jar
 * `./gradlew clean build`
@@ -29,13 +29,14 @@ it provides a REST API that CRUD operations related to leasing a car.
 - Step 2. run  the spring boot service from project root in another terminal
 * `./gradlew bootRun`
 
-## Testing the Microservice using POSTMAN
+## Test the Microservice using POSTMAN
+
 postman collection added in root directory to perform testing API  
-``Postman collection file to test and try API xyz``
+`Postman collection file to test and try API xyz`
 ## API Reference
 The following endpoints are available in this microservice:
 
-```POST v1/api/customers``` Add a new customer.  
+`POST v1/api/customers` Add a new customer.  
 Example request
 ```json
 {
@@ -54,11 +55,11 @@ Example response
 }
 ```
 
-```GET v1/api/customers/{id}```
+`GET v1/api/customers/{id}`
 Get the customer with id
-```DELETE v1/api/customers/{id}```
+`DELETE v1/api/customers/{id}`
 Delete the customer for given id
-```PUT v1/api/customers/{id}```
+`PUT v1/api/customers/{id}`
 update the customer for given id
-```PUT v1/api/customers/{id}```
+`PUT v1/api/customers/{id}`
 update the customer for given id
