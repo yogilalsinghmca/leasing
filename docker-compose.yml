@@ -3,8 +3,7 @@ services:
   leasing-api:
     container_name: leasing-api
     image: leasing-image:latest
-#    networks:
-#      - leasing-api-network
+    command: "sh -c sleep 30 && start leasing-api"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     build:
@@ -13,13 +12,16 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      lease-db:
-        condition: service_completed_successfully
+     lease-db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --fail http://localhost:8080/actuator/health || exit 1" ]
+      interval: 10s
+      timeout: 30s
+      retries: 3
   lease-db:
     container_name: lease-db
     image: mysql:latest
-#    networks:
-#      - leasing-api-network
     ports:
       - "3306:3306"
     environment:
@@ -29,5 +31,8 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
     volumes:
       - ./mysql-data:/var/lib/mysql
-#networks:
-#  leasing-api-network:
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 30s
+      retries: 3
